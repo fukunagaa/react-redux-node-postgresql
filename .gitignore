@@ -1,0 +1,6 @@
+# node
+node_modules
+
+# bundle file
+cliant/app.js
+server/app.js

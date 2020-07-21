@@ -1,0 +1,42 @@
+{
+  "name": "react-redux-node-postgresql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "dev": "webpack --config webpack.config.js --watch",
+    "start": "node ./server/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fukunagaa/react-redux-node-postgresql.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fukunagaa/react-redux-node-postgresql/issues"
+  },
+  "homepage": "https://github.com/fukunagaa/react-redux-node-postgresql#readme",
+  "devDependencies": {
+    "@babel/core": "^7.10.5",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/polyfill": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "classnames": "^2.2.6",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "@types/classnames": "^2.2.10",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-router-dom": "^5.1.5"
+  }
+}
