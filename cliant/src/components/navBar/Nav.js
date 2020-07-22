@@ -18,6 +18,7 @@ class Nav extends React.Component {
   render() {
     const location = this.props.location;
     const homeClass = location.pathname === "/" ? "active" : "";
+    const todosClass = location.pathname.match(/^\/todos/) ? "active" : "";
     const favoritesClass = location.pathname.match(/^\/favorites/)
       ? "active"
       : "";
@@ -28,22 +29,22 @@ class Nav extends React.Component {
     return (
       <nav>
         <ul>
-          <li>
-              <Link to="/" onClick={this.toggleCollapse}>
-                Home
-              </Link>
+          <li className={homeClass}>
+            <Link to="/" onClick={this.toggleCollapse}>
+              Home
+            </Link>
           </li>
-          <li>
+          <li className={todosClass}>
             <Link to="/todos/main" onClick={this.toggleCollapse}>
               Todo
             </Link>
           </li>
-          <li>
+          <li className={favoritesClass}>
             <Link to="/favorites/main" onClick={this.toggleCollapse}>
               Favorites
             </Link>
           </li>
-          <li>
+          <li className={settingsClass}>
             <Link to="/settings/main" onClick={this.toggleCollapse}>
               Setting
             </Link>
@@ -55,48 +56,6 @@ class Nav extends React.Component {
           </li>
         </ul>
       </nav>
-      // <nav
-      //   className={"navbar navbar-inverse navbar-fixed-top"}
-      //   role="navigation"
-      // >
-      //   <div className={"container"}>
-      //     <div className={"navbar-header"}>
-      //       <button
-      //         type="button"
-      //         className={"navbar-toggle"}
-      //         data-toggle="collapse"
-      //         data-target="#bs-example-navbar-collapse-1"
-      //       >
-      //         <span className={"sr-only"}>Toggle navigation</span>
-      //         <span className={"icon-bar"}></span>
-      //         <span className={"icon-bar"}></span>
-      //         <span className={"icon-bar"}></span>
-      //       </button>
-      //     </div>
-      //     <div
-      //       className={"navbar-collapse" + collapseClass}
-      //       id="bs-example-navbar-collapse-1"
-      //     >
-      //       <ul className={"nav navbar-nav"}>
-      //         <li className={homeClass}>
-      //           <Link to="/" onClick={this.toggleCollapse}>
-      //             home
-      //           </Link>
-      //         </li>
-      //         <li className={favoritesClass}>
-      //           <Link to="/favorites/link" onClick={this.toggleCollapse}>
-      //             favorites
-      //           </Link>
-      //         </li>
-      //         <li className={settingsClass}>
-      //           <Link to="/settings/main" onClick={this.toggleCollapse}>
-      //             Settings
-      //           </Link>
-      //         </li>
-      //       </ul>
-      //     </div>
-      //   </div>
-      // </nav>
     );
   }
 }
