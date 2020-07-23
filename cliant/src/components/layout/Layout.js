@@ -10,7 +10,6 @@ class Layout extends React.Component {
     return (
       <div>
         <Nav location={location} />
-        <h1>Welcome!</h1>
         {this.props.children}
       </div>
     );
