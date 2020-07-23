@@ -5,12 +5,9 @@ import { toggleTodo } from "../../redux/actions";
 
 import { STATUS_DONE } from "../../utils/constants";
 
-const Todo = ({ todo }) => (
-  <li className="todo-item">
-    {todo.status == STATUS_DONE ? "🙆" : "🙅"}{" "}
-    <span>
-      {todo.content}
-    </span>
+const Todo = ({ todo, index, toggleTodo }) => (
+  <li className={"list-style-none"} onClick={() => toggleTodo(index)}>
+    {todo.status == STATUS_DONE ? "🙆" : "🙅"} <span>{todo.content}</span>
   </li>
 );
 

@@ -2,11 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import Todo from "./Todo";
 
-const Todos = ({ todosIds, byIds }) => (
-  <div className="todo-list-todo-container todo-list-all-container">
+const Doings = ({ doingsIds, byIds }) => (
+  <div className={"todo-list-doing-container todo-list-all-container"}>
     <ul>
-      {todosIds && todosIds
-        ? todosIds.map((index) => {
+      {doingsIds && doingsIds
+        ? doingsIds.map((index) => {
             return (
               <Todo key={`todo-${index}`} index={index} todo={byIds[index]} />
             );
@@ -19,14 +19,14 @@ const Todos = ({ todosIds, byIds }) => (
 const mapStateToProps = (state) => {
   const todos = state.todos;
   const byIds = state.todos.byIds;
-  let todosIds = [];
+  let doingsIds = [];
   todos.allIds.map((index) => {
     console.log(todos.byIds[index].status);
-    if (todos.byIds[index].status == "TODO") {
-      todosIds.push(index);
+    if (todos.byIds[index].status == "DOING") {
+      doingsIds.push(index);
     }
   });
-  return { todosIds, byIds };
+  return { doingsIds, byIds };
 };
 
-export default connect(mapStateToProps)(Todos);
+export default connect(mapStateToProps)(Doings);

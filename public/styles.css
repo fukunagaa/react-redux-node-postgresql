@@ -30,3 +30,29 @@ nav li a:hover {
 .active {
   background-color: #29634c;
 }
+
+.list-style-none {
+  list-style: none;
+}
+
+.todo-list-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.todo-list-todo-container {
+  background-color: rgb(255, 231, 231);
+}
+
+.todo-list-doing-container {
+  background-color: rgb(207, 225, 250);
+}
+
+.todo-list-done-container {
+  background-color: rgb(214, 253, 247);
+}
+
+.todo-list-all-container {
+  width: 300px;
+  height: 500px;
+}
