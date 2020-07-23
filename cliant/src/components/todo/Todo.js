@@ -1,14 +1,18 @@
 import React from "react";
-import { connect } from "react-redux";
 import className from "classnames";
-import { toggleTodo } from "../../redux/actions";
 
 import { STATUS_DONE } from "../../utils/constants";
 
-const Todo = ({ todo, index, toggleTodo }) => (
-  <li className={"list-style-none"} onClick={() => toggleTodo(index)}>
+const Todo = ({ todo, index, toggleTodo, dragStart }) => (
+  <li
+    className={"list-style-none"}
+    id={index}
+    onClick={() => toggleTodo(index)}
+    draggable="true"
+    onDragStart={() => event.dataTransfer.setData("id", event.target.id)}
+  >
     {todo.status == STATUS_DONE ? "🙆" : "🙅"} <span>{todo.content}</span>
   </li>
 );
 
-export default connect(null, { toggleTodo })(Todo);
+export default Todo;

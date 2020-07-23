@@ -6,6 +6,19 @@ import Dones from "./Dones";
 import AddTodo from "./AddTodo";
 
 class TodoApp extends React.Component {
+
+  dragover = (event) => {
+    console.log("dragover");
+    event.preventDefault();
+  }
+
+  drop = (event) => {
+    let id = event.dataTransfer.getData("text");
+    let drag_elm =document.getElementById(id);
+    event.currentTarget.appendChild(drag_elm);
+    event.preventDefault();
+  }
+
   render() {
     return (
       <div>

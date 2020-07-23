@@ -1,7 +1,13 @@
-import { ADD_TODO, TOGGLE_TODO } from "../actionTypes";
+import { ADD_TODO, DROP_TODO } from "../actionTypes";
 
-import { todoInitialState } from "../initialState"; 
-import { STATUS_TODO, STATUS_DOING, STATUS_DONE, FAVORITE_YES, FAVORITE_NO } from "../../utils/constants";
+import { todoInitialState } from "../initialState";
+import {
+  STATUS_TODO,
+  STATUS_DOING,
+  STATUS_DONE,
+  FAVORITE_YES,
+  FAVORITE_NO,
+} from "../../utils/constants";
 
 export default function (state = todoInitialState, action) {
   switch (action.type) {
@@ -20,15 +26,17 @@ export default function (state = todoInitialState, action) {
         },
       };
     }
-    case TOGGLE_TODO: {
-      const { id } = action.payload;
+    case DROP_TODO: {
+      const { event, status } = action.payload;
+      const id = Number(event.dataTransfer.getData("id"));
+      event.preventDefault();
       return {
         ...state,
         byIds: {
           ...state.byIds,
           [id]: {
             ...state.byIds[id],
-            status: STATUS_DONE,
+            status,
           },
         },
       };

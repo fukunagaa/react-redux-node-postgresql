@@ -1,9 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import Todo from "./Todo";
+import { dropTodo } from "../../redux/actions";
+import { STATUS_DOING } from "../../utils/constants";
 
-const Doings = ({ doingsIds, byIds }) => (
-  <div className={"todo-list-doing-container todo-list-all-container"}>
+const Doings = ({ doingsIds, byIds, dropTodo }) => (
+  <div
+    className={"todo-list-doing-container todo-list-all-container"}
+    onDragOver={() => event.preventDefault()}
+    onDrop={() => dropTodo(event, STATUS_DOING)}
+  >
     <ul>
       {doingsIds && doingsIds
         ? doingsIds.map((index) => {
@@ -22,11 +28,11 @@ const mapStateToProps = (state) => {
   let doingsIds = [];
   todos.allIds.map((index) => {
     console.log(todos.byIds[index].status);
-    if (todos.byIds[index].status == "DOING") {
+    if (todos.byIds[index].status == STATUS_DOING) {
       doingsIds.push(index);
     }
   });
   return { doingsIds, byIds };
 };
 
-export default connect(mapStateToProps)(Doings);
+export default connect(mapStateToProps, { dropTodo })(Doings);
