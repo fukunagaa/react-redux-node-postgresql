@@ -1,4 +1,4 @@
-import { ADD_TODO, DROP_TODO } from "../actionTypes";
+import { ADD_TODO, DROP_TODO, TOGGLE_FAVORITE } from "../actionTypes";
 
 import { todoInitialState } from "../initialState";
 import {
@@ -29,6 +29,7 @@ export default function (state = todoInitialState, action) {
     case DROP_TODO: {
       const { event, status } = action.payload;
       const id = Number(event.dataTransfer.getData("id"));
+      // dropイベント用
       event.preventDefault();
       return {
         ...state,
@@ -40,6 +41,19 @@ export default function (state = todoInitialState, action) {
           },
         },
       };
+    }
+    case TOGGLE_FAVORITE: {
+      const { id } = action.payload;
+      return {
+        ...state,
+        byIds: {
+          ...state.byIds,
+          [id]: {
+            ...state.byIds[id],
+            favorite: !state.byIds[id].favorite
+          }
+        }
+      }
     }
     default:
       return state;

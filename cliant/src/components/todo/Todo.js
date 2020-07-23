@@ -1,17 +1,28 @@
 import React from "react";
+import { connect } from "react-redux";
 import className from "classnames";
 
-import { STATUS_DONE } from "../../utils/constants";
+import { toggleFavorite } from "../../redux/actions"
+import { STATUS_DONE, FAVORITE_YES, FAVORITE_NO } from "../../utils/constants";
 
-const Todo = ({ todo, index }) => (
+const Todo = ({ todo, index, toggleFavorite }) => (
   <li
     className={"list-style-none"}
     id={index}
     draggable="true"
     onDragStart={() => event.dataTransfer.setData("id", event.target.id)}
   >
-    {todo.status == STATUS_DONE ? "🙆" : "🙅"} <span>{todo.content}</span>
+    <div className={"todo-item-container"}>
+      <div className={"item"}>
+        {todo.status == STATUS_DONE ? "🙆" : "🙅"} <span>{todo.content}</span>
+      </div>
+      <div className={"item"}>
+        <button className={"button-clear-decoration"} onClick={() => toggleFavorite(index)}>
+          {todo.favorite == FAVORITE_NO ? "🤍" : "💖"}
+        </button>
+      </div>
+    </div>
   </li>
 );
 
-export default Todo;
+export default connect(null, { toggleFavorite })(Todo);
