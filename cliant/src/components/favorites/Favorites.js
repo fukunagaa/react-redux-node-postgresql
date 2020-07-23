@@ -13,7 +13,7 @@ const Favorites = ({ doingsIds, byIds }) => (
               <Todo key={`todo-${index}`} index={index} todo={byIds[index]} />
             );
           })
-        : "NO todos, yay!"}
+        : "NO Favorite, yay!"}
     </ul>
   </div>
 );

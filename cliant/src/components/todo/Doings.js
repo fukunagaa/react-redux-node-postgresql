@@ -17,7 +17,7 @@ const Doings = ({ doingsIds, byIds, dropTodo }) => (
               <Todo key={`todo-${index}`} index={index} todo={byIds[index]} />
             );
           })
-        : "NO todos, yay!"}
+        : "NO Doing, yay!"}
     </ul>
   </div>
 );
