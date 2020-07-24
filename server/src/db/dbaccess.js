@@ -10,7 +10,7 @@ export default {
       await client.connect();
       console.log("Connected successfully in async");
       const allRows = await client.query(
-        "select id, content, status, favorite from todos_table"
+        "select content, status, favorite, id_seq from todos_table"
       );
       return allRows.rows;
     } catch (err) {
@@ -20,14 +20,14 @@ export default {
       console.log("Client disconnected successfully");
     }
   },
-  createTodo: async function (id, content) {
+  createTodo: async function (content) {
     try {
       client = new Client(postgresOption);
       await client.connect();
       console.log("Connected successfully in async");
       const result = await client.query(
-        "insert into todos_table (id, content, status, registered_date, updated_date ) values($1, $2, 'TODO', current_timestamp, current_timestamp)",
-        [id, content]
+        "insert into todos_table (content, status, registered_date, updated_date ) values($1, 'TODO', current_timestamp, current_timestamp)",
+        [content]
       );
       return result.rowCount;
     } catch (err) {
