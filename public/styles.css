@@ -1,0 +1,69 @@
+body {
+  font-family: sans-serif;
+}
+nav {
+  background-color: #222222;
+  color: white;
+}
+nav ul {
+  display: flex;
+  flex-flow: row;
+  margin: 0;
+  padding: 6px;
+  list-style-type: none;
+}
+nav a {
+  display: block;
+  border-radius: 4px;
+  padding: 12px 24px;
+  color: white;
+  text-decoration: none;
+}
+nav li a:hover {
+  background-color: #29634c;
+}
+
+.login {
+  margin-left: auto;
+}
+
+.active {
+  background-color: #29634c;
+}
+
+.list-style-none {
+  list-style: none;
+}
+
+.todo-list-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.todo-list-todo-container {
+  background-color: rgb(255, 231, 231);
+}
+
+.todo-list-doing-container {
+  background-color: rgb(207, 225, 250);
+}
+
+.todo-list-done-container {
+  background-color: rgb(214, 253, 247);
+}
+
+.todo-list-all-container {
+  width: 300px;
+  height: 500px;
+}
+
+.button-clear-decoration {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.todo-item-container {
+  display: flex;
+  justify-content: space-between;
+}
