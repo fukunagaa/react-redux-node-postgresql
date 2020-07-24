@@ -18,7 +18,7 @@ const Todo = ({ todo, index, toggleFavorite }) => (
       </div>
       <div className={"item"}>
         <button className={"button-clear-decoration"} onClick={() => toggleFavorite(index)}>
-          {todo.favorite == FAVORITE_NO ? "🤍" : "💖"}
+          {todo.favorite ? "💖" : "🤍"}
         </button>
       </div>
     </div>
