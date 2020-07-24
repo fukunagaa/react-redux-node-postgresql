@@ -1,29 +1,42 @@
-import { ADD_TODO, DROP_TODO, TOGGLE_FAVORITE } from "../actionTypes";
+import {
+  ADD_TODO_PENDING,
+  ADD_TODO_FULFILLED,
+  ADD_TODO_REJECTED,
+  DROP_TODO,
+  TOGGLE_FAVORITE,
+} from "../actionTypes";
 
 import { todoInitialState } from "../initialState";
-import {
-  STATUS_TODO,
-  STATUS_DOING,
-  STATUS_DONE,
-  FAVORITE_YES,
-  FAVORITE_NO,
-} from "../../utils/constants";
+import { STATUS_TODO, FAVORITE_NO } from "../../utils/constants";
+
+let byIds;
+let allIds;
 
 export default function (state = todoInitialState, action) {
+  console.log(action);
   switch (action.type) {
-    case ADD_TODO: {
-      const { id, content } = action.payload;
-      return {
-        ...state,
-        allIds: [...state.allIds, id],
-        byIds: {
-          ...state.byIds,
-          [id]: {
-            content,
-            status: STATUS_TODO,
-            favorite: FAVORITE_NO,
+    case ADD_TODO_FULFILLED: {
+      const { data } = action.payload;
+      console.log(data);
+      byIds = new Object();
+      allIds = [];
+      data.map((obj) => {
+        let intId = Number(obj.id_seq);
+        console.log(intId);
+        byIds = {
+          ...byIds,
+          [intId]: {
+            content: obj.content,
+            status: obj.status,
+            favorite: obj.favorite,
           },
-        },
+        };
+        allIds.push(intId);
+      });
+      console.log(byIds);
+      return {
+        allIds,
+        byIds,
       };
     }
     case DROP_TODO: {
@@ -50,10 +63,10 @@ export default function (state = todoInitialState, action) {
           ...state.byIds,
           [id]: {
             ...state.byIds[id],
-            favorite: !state.byIds[id].favorite
-          }
-        }
-      }
+            favorite: !state.byIds[id].favorite,
+          },
+        },
+      };
     }
     default:
       return state;

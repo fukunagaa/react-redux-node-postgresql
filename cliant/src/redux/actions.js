@@ -1,12 +1,9 @@
 import { ADD_TODO, DROP_TODO, TOGGLE_FAVORITE } from "./actionTypes";
+import axios from "axios";
 
-let todoId = 0;
-export const addTodo = (content) => ({
+export const addTodo = (params) => ({
   type: ADD_TODO,
-  payload: {
-    content,
-    id: ++todoId,
-  },
+  payload: axios.post("/addTodo", params),
 });
 
 export const dropTodo = (event, status) => ({
