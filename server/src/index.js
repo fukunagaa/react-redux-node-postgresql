@@ -108,6 +108,15 @@ const server = http.createServer(async (req, res) => {
                 resData = JSON.stringify(updateArray);
                 setResponse(res, contextType, resData, encoding);
                 break;
+              case "/toggleFavorite":
+                console.log("axios updateFavorite");
+                await todoRouter.updateFavorite(query.id, query.favorite);
+                const toggleArray = await todoRouter.selectTodoAll();
+                contextType = "application/json";
+                resData = JSON.stringify(toggleArray);
+                console.log(toggleArray);
+                setResponse(res, contextType, resData, encoding);
+                break;
               case "/selectTodo":
                 console.log("axios selectTodo");
                 let allRows = await todoRouter.selectTodoAll();

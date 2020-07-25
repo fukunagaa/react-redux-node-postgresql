@@ -14,3 +14,8 @@ export async function updateTodo(id, status) {
   const updateCount = await dbaccess.updateTodo(id, status);
   return updateCount;
 }
+
+export async function updateFavorite(id, favorite) {
+    const updateFavorite = await dbaccess.updateFavorite(id, favorite);
+    return updateFavorite;
+  }

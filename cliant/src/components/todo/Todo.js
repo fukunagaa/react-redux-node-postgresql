@@ -21,7 +21,12 @@ const Todo = ({ todo, index, toggleFavorite }) => (
       <div className={"item"}>
         <button
           className={"button-clear-decoration"}
-          onClick={() => toggleFavorite(index)}
+          onClick={() => {
+            let params = new URLSearchParams();
+            params.append("id", index);
+            params.append("favorite", todo.favorite);
+            toggleFavorite(params);
+          }}
         >
           {todo.favorite ? "💖" : "🤍"}
         </button>

@@ -54,4 +54,21 @@ export default {
       console.log("Client disconnected successfully");
     }
   },
+  updateFavorite: async function (id, favorite) {
+    try {
+      client = new Client(postgresOption);
+      await client.connect();
+      console.log("Connected successfully in async");
+      const result = await client.query(
+        "update todos_table set favorite = $1 where id_seq = $2",
+        [favorite, id]
+      );
+      return result.rowCount;
+    } catch (err) {
+      console.log("Something wrong happend", e);
+    } finally {
+      await client.end();
+      console.log("Client disconnected successfully");
+    }
+  },
 };

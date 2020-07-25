@@ -11,9 +11,7 @@ export const dropTodo = (params) => ({
   payload: axios.post("/updateTodo", params),
 });
 
-export const toggleFavorite = (id) => ({
+export const toggleFavorite = (params) => ({
   type: TOGGLE_FAVORITE,
-  payload: {
-    id,
-  },
+  payload: axios.post("/toggleFavorite", params),
 });
