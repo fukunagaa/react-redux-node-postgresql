@@ -94,11 +94,18 @@ const server = http.createServer(async (req, res) => {
                 break;
               case "/addTodo":
                 console.log("axios addTodo");
-                console.log(query.content);
                 await todoRouter.createTodo(query.content);
                 const array = await todoRouter.selectTodoAll();
                 contextType = "application/json";
                 resData = JSON.stringify(array);
+                setResponse(res, contextType, resData, encoding);
+                break;
+              case "/updateTodo":
+                console.log("axios updateTodo");
+                await todoRouter.updateTodo(query.id, query.status);
+                const updateArray = await todoRouter.selectTodoAll();
+                contextType = "application/json";
+                resData = JSON.stringify(updateArray);
                 setResponse(res, contextType, resData, encoding);
                 break;
               case "/selectTodo":

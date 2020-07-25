@@ -8,7 +8,13 @@ const Doings = ({ doingsIds, byIds, dropTodo }) => (
   <div
     className={"todo-list-doing-container todo-list-all-container"}
     onDragOver={() => event.preventDefault()}
-    onDrop={() => dropTodo(event, STATUS_DOING)}
+    onDrop={() => {
+      const id = Number(event.dataTransfer.getData("id"));
+      let params = new URLSearchParams();
+      params.append("id", id);
+      params.append("status", STATUS_DOING);
+      dropTodo(params);
+    }}
   >
     <ul>
       {doingsIds && doingsIds

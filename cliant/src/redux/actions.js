@@ -6,12 +6,9 @@ export const addTodo = (params) => ({
   payload: axios.post("/addTodo", params),
 });
 
-export const dropTodo = (event, status) => ({
+export const dropTodo = (params) => ({
   type: DROP_TODO,
-  payload: {
-    event,
-    status,
-  },
+  payload: axios.post("/updateTodo", params),
 });
 
 export const toggleFavorite = (id) => ({

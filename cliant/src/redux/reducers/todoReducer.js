@@ -2,7 +2,9 @@ import {
   ADD_TODO_PENDING,
   ADD_TODO_FULFILLED,
   ADD_TODO_REJECTED,
-  DROP_TODO,
+  DROP_TODO_PENDING,
+  DROP_TODO_FULFILLED,
+  DROP_TODO_REJECTED,
   TOGGLE_FAVORITE,
 } from "../actionTypes";
 
@@ -39,20 +41,28 @@ export default function (state = todoInitialState, action) {
         byIds,
       };
     }
-    case DROP_TODO: {
-      const { event, status } = action.payload;
-      const id = Number(event.dataTransfer.getData("id"));
-      // dropイベント用
-      event.preventDefault();
-      return {
-        ...state,
-        byIds: {
-          ...state.byIds,
-          [id]: {
-            ...state.byIds[id],
-            status,
+    case DROP_TODO_FULFILLED: {
+      const { data } = action.payload;
+      console.log(data);
+      byIds = new Object();
+      allIds = [];
+      data.map((obj) => {
+        let intId = Number(obj.id_seq);
+        console.log(intId);
+        byIds = {
+          ...byIds,
+          [intId]: {
+            content: obj.content,
+            status: obj.status,
+            favorite: obj.favorite,
           },
-        },
+        };
+        allIds.push(intId);
+      });
+      console.log(byIds);
+      return {
+        allIds,
+        byIds,
       };
     }
     case TOGGLE_FAVORITE: {
