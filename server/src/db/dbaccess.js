@@ -10,7 +10,7 @@ export default {
       await client.connect();
       console.log("Connected successfully in async");
       const allRows = await client.query(
-        "select content, status, favorite, id_seq from todos_table"
+        "select content, status, favorite, id_seq from todos_table ORDER BY updated_date DESC"
       );
       return allRows.rows;
     } catch (err) {
@@ -43,7 +43,7 @@ export default {
       await client.connect();
       console.log("Connected successfully in async");
       const result = await client.query(
-        "update todos_table set status = $1 where id_seq = $2",
+        "update todos_table set status = $1, updated_date = current_timestamp where id_seq = $2",
         [status, id]
       );
       return result.rowCount;
@@ -60,7 +60,7 @@ export default {
       await client.connect();
       console.log("Connected successfully in async");
       const result = await client.query(
-        "update todos_table set favorite = $1 where id_seq = $2",
+        "update todos_table set favorite = $1, updated_date = current_timestamp where id_seq = $2",
         [favorite, id]
       );
       return result.rowCount;
