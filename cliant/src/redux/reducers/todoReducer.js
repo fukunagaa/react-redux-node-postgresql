@@ -18,6 +18,17 @@ import { getLocalTodoList } from "../todoCreator";
 export default function (state = todoInitialState, action) {
   console.log(action);
   switch (action.type) {
+    case ADD_TODO_PENDING:
+    case DROP_TODO_PENDING:
+    case TOGGLE_FAVORITE_PENDING:
+      console.log("PEDDING NOW");
+      return {
+        ...state,
+        fetchStatus: {
+          fetching: true,
+          fetched: false,
+        },
+      };
     case ADD_TODO_FULFILLED:
     case DROP_TODO_FULFILLED:
     case TOGGLE_FAVORITE_FULFILLED: {
@@ -26,8 +37,23 @@ export default function (state = todoInitialState, action) {
       return {
         allIds,
         byIds,
+        fetchStatus: {
+          fetching: false,
+          fetched: true,
+        },
       };
     }
+    case ADD_TODO_REJECTED:
+    case DROP_TODO_REJECTED:
+    case TOGGLE_FAVORITE_REJECTED:
+      return {
+        ...state,
+        fetchStatus: {
+          fetching: false,
+          fetched: true,
+        },
+        error: payload,
+      };
     default:
       return state;
   }
