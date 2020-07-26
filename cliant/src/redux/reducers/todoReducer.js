@@ -18,23 +18,8 @@ import { getTodoList } from "../todoCreator";
 export default function (state = todoInitialState, action) {
   console.log(action);
   switch (action.type) {
-    case ADD_TODO_FULFILLED: {
-      const { data } = action.payload;
-      const { byIds, allIds } = getTodoList(data);
-      return {
-        allIds,
-        byIds,
-      };
-    }
-    case DROP_TODO_FULFILLED: {
-      const { data } = action.payload;
-      const { byIds, allIds } = getTodoList(data);
-      console.log(byIds);
-      return {
-        allIds,
-        byIds,
-      };
-    }
+    case ADD_TODO_FULFILLED:
+    case DROP_TODO_FULFILLED:
     case TOGGLE_FAVORITE_FULFILLED: {
       const { data } = action.payload;
       const { byIds, allIds } = getTodoList(data);
