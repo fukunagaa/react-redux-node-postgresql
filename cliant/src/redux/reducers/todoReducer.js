@@ -51,8 +51,8 @@ export default function (state = todoInitialState, action) {
         fetchStatus: {
           fetching: false,
           fetched: true,
+          fetchError: payload,
         },
-        error: payload,
       };
     default:
       return state;
