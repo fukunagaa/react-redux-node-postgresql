@@ -22,7 +22,7 @@ const Todo = ({ todo, index, toggleFavorite }) => (
         <button
           className={"button-clear-decoration"}
           onClick={() => {
-            let params = new URLSearchParams();
+            const params = new URLSearchParams();
             params.append("id", index);
             params.append("favorite", !todo.favorite);
             toggleFavorite(params);

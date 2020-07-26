@@ -10,7 +10,7 @@ const Todos = ({ todosIds, byIds, dropTodo }) => (
     onDragOver={() => event.preventDefault()}
     onDrop={() => {
       const id = Number(event.dataTransfer.getData("id"));
-      let params = new URLSearchParams();
+      const params = new URLSearchParams();
       params.append("id", id);
       params.append("status", STATUS_TODO);
       dropTodo(params);

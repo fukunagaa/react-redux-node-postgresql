@@ -16,7 +16,7 @@ class AddTodo extends React.Component {
 
   addTodo = () => {
     const content = this.state.text;
-    let params = new URLSearchParams();
+    const params = new URLSearchParams();
     params.append("content", content);
     this.props.addTodo(params);
     this.setState({ text: "" });
