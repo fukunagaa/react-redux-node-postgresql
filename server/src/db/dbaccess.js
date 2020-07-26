@@ -25,11 +25,11 @@ export default {
       client = new Client(postgresOption);
       await client.connect();
       console.log("Connected successfully in async");
-      const result = await client.query(
+      const createCount = await client.query(
         "insert into todos_table (content, status, registered_date, updated_date ) values($1, 'TODO', current_timestamp, current_timestamp)",
         [content]
       );
-      return result.rowCount;
+      return createCount.rowCount;
     } catch (err) {
       console.log("Something wrong happend", e);
     } finally {
@@ -37,16 +37,16 @@ export default {
       console.log("Client disconnected successfully");
     }
   },
-  updateTodo: async function (id, status) {
+  updateStatus: async function (id, status) {
     try {
       client = new Client(postgresOption);
       await client.connect();
       console.log("Connected successfully in async");
-      const result = await client.query(
+      const updateStatusCount = await client.query(
         "update todos_table set status = $1, updated_date = current_timestamp where id_seq = $2",
         [status, id]
       );
-      return result.rowCount;
+      return updateStatusCount.rowCount;
     } catch (err) {
       console.log("Something wrong happend", e);
     } finally {
@@ -59,11 +59,11 @@ export default {
       client = new Client(postgresOption);
       await client.connect();
       console.log("Connected successfully in async");
-      const result = await client.query(
+      const updateFavoriteCount = await client.query(
         "update todos_table set favorite = $1, updated_date = current_timestamp where id_seq = $2",
         [favorite, id]
       );
-      return result.rowCount;
+      return updateFavoriteCount.rowCount;
     } catch (err) {
       console.log("Something wrong happend", e);
     } finally {

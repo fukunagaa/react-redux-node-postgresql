@@ -10,12 +10,12 @@ export async function selectTodoAll() {
   return allRows;
 }
 
-export async function updateTodo(id, status) {
-  const updateCount = await dbaccess.updateTodo(id, status);
-  return updateCount;
+export async function updateStatus(id, status) {
+  const updateStatusCount = await dbaccess.updateStatus(id, status);
+  return updateStatusCount;
 }
 
 export async function updateFavorite(id, favorite) {
-    const updateFavorite = await dbaccess.updateFavorite(id, favorite);
-    return updateFavorite;
+    const updateFavoriteCount = await dbaccess.updateFavorite(id, favorite);
+    return updateFavoriteCount;
   }

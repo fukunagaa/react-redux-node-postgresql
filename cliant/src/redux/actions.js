@@ -8,10 +8,10 @@ export const addTodo = (params) => ({
 
 export const dropTodo = (params) => ({
   type: DROP_TODO,
-  payload: axios.post("/updateTodo", params),
+  payload: axios.post("/updateStatus", params),
 });
 
 export const toggleFavorite = (params) => ({
   type: TOGGLE_FAVORITE,
-  payload: axios.post("/toggleFavorite", params),
+  payload: axios.post("/updateFavorite", params),
 });

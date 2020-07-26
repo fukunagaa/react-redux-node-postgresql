@@ -14,7 +14,7 @@ class AddTodo extends React.Component {
     this.setState({ text });
   };
 
-  add = () => {
+  addTodo = () => {
     const content = this.state.text;
     let params = new URLSearchParams();
     params.append("content", content);
@@ -32,7 +32,7 @@ class AddTodo extends React.Component {
           onChange={this.changeText}
           value={this.state.text}
         />
-        <button onClick={this.add}>todo追加</button>
+        <button onClick={this.addTodo}>todo追加</button>
       </div>
     );
   }
