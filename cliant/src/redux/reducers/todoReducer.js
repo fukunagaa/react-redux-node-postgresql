@@ -9,10 +9,10 @@ import {
   TOGGLE_FAVORITE_PENDING,
   TOGGLE_FAVORITE_FULFILLED,
   TOGGLE_FAVORITE_REJECTED,
-  CHANGE_CONTEXT_FLAG,
-  FETCH_UPDATE_CONTEXT_PENDING,
-  FETCH_UPDATE_CONTEXT_FULFILLED,
-  FETCH_UPDATE_CONTEXT_REJECTED,
+  CHANGE_CONTENT_FLAG,
+  FETCH_UPDATE_CONTENT_PENDING,
+  FETCH_UPDATE_CONTENT_FULFILLED,
+  FETCH_UPDATE_CONTENT_REJECTED,
 } from "../actionTypes";
 
 import { todoInitialState } from "../initialState";
@@ -25,7 +25,7 @@ export default function (state = todoInitialState, action) {
     case ADD_TODO_PENDING:
     case DROP_TODO_PENDING:
     case TOGGLE_FAVORITE_PENDING:
-    case FETCH_UPDATE_CONTEXT_PENDING:
+    case FETCH_UPDATE_CONTENT_PENDING:
       console.log("PEDDING NOW");
       return {
         ...state,
@@ -37,7 +37,7 @@ export default function (state = todoInitialState, action) {
     case ADD_TODO_FULFILLED:
     case DROP_TODO_FULFILLED:
     case TOGGLE_FAVORITE_FULFILLED:
-    case FETCH_UPDATE_CONTEXT_FULFILLED: {
+    case FETCH_UPDATE_CONTENT_FULFILLED: {
       const { data } = action.payload;
       const { byIds, allIds } = getLocalTodoList(data);
       return {
@@ -52,7 +52,7 @@ export default function (state = todoInitialState, action) {
     case ADD_TODO_REJECTED:
     case DROP_TODO_REJECTED:
     case TOGGLE_FAVORITE_REJECTED:
-    case FETCH_UPDATE_CONTEXT_REJECTED:
+    case FETCH_UPDATE_CONTENT_REJECTED:
       return {
         ...state,
         fetchStatus: {
@@ -61,7 +61,7 @@ export default function (state = todoInitialState, action) {
           fetchError: payload,
         },
       };
-    case CHANGE_CONTEXT_FLAG:
+    case CHANGE_CONTENT_FLAG:
       const { id, changingFlag } = action.payload;
       return {
         ...state,

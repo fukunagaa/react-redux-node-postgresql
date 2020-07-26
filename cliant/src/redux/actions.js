@@ -2,8 +2,8 @@ import {
   ADD_TODO,
   DROP_TODO,
   TOGGLE_FAVORITE,
-  CHANGE_CONTEXT_FLAG,
-  FETCH_UPDATE_CONTEXT,
+  CHANGE_CONTENT_FLAG,
+  FETCH_UPDATE_CONTENT,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -23,12 +23,12 @@ export const toggleFavorite = (params) => ({
 });
 
 export const updateContent = (params) => ({
-  type: FETCH_UPDATE_CONTEXT,
+  type: FETCH_UPDATE_CONTENT,
   payload: axios.post("/updateContent", params),
 });
 
 export const updateChangeFlag = (id, changingFlag) => ({
-  type: CHANGE_CONTEXT_FLAG,
+  type: CHANGE_CONTENT_FLAG,
   payload: {
     id,
     changingFlag,
