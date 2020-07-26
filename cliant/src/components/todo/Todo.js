@@ -32,12 +32,15 @@ const Todo = ({
   >
     {todo.changingFlag ? (
       <div className={"todo-item-container"}>
-        <div className={"item"}>
-          <input
+        <div className={"item width-100-percent"}>
+          <textarea
+            className={
+              "margin-13-0-px change-textarea-size common-textarea-option"
+            }
             id={`changing_text_todo${index}`}
             type="text"
             defaultValue={todo.content}
-          ></input>
+          ></textarea>
         </div>
         <div className={"item"}>
           <button
@@ -52,7 +55,7 @@ const Todo = ({
               updateContent(params);
             }}
           >
-            更新
+            ✔
           </button>
         </div>
         <div className={"item"}>
@@ -60,21 +63,23 @@ const Todo = ({
             className={"button-clear-decoration"}
             onClick={() => updateChangeFlag(index, CHANGING_FLAG_FALSE)}
           >
-            終了
+            ✘
           </button>
         </div>
       </div>
     ) : (
       <div className={"todo-item-container"}>
         <div className={"item"}>
-          {todo.status == STATUS_DONE ? "🙆" : "🙅"}{" "}
-          <span onClick={() => updateChangeFlag(index, CHANGING_FLAG_TRUE)}>
-            {todo.content}
-          </span>
+          <pre
+            className={"margin-13-0-px display-wrap-keep-all"}
+            onClick={() => updateChangeFlag(index, CHANGING_FLAG_TRUE)}
+          >
+            {todo.status == STATUS_DONE ? "🙆" : "🙅"} {todo.content}
+          </pre>
         </div>
         <div className={"item"}>
           <button
-            className={"button-clear-decoration"}
+            className={"button-clear-decoration margin-13-0-px"}
             onClick={() => {
               const params = new URLSearchParams();
               params.append("id", index);

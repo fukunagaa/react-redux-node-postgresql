@@ -25,7 +25,8 @@ class AddTodo extends React.Component {
   render() {
     return (
       <div>
-        <input
+        <textarea
+          className={"common-textarea-option main-textarea-size"}
           id="add-todo-text-area"
           type="text"
           placeholder="example) go shopping"

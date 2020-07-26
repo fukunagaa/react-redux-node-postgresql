@@ -27,6 +27,10 @@ nav li a:hover {
   margin-left: auto;
 }
 
+.margin-13-0-px {
+  margin: 13px 0px;
+}
+
 .active {
   background-color: #29634c;
 }
@@ -53,7 +57,7 @@ nav li a:hover {
 }
 
 .todo-list-all-container {
-  width: 300px;
+  width: 400px;
   min-height: 500px;
   height: auto;
 }
@@ -67,4 +71,44 @@ nav li a:hover {
 .todo-item-container {
   display: flex;
   justify-content: space-between;
+}
+
+.todo-child-item-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.todo-item-child-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.change-textarea-size {
+  width: 100%;
+  height: 90px;
+}
+
+.main-textarea-size {
+  width: 240px;
+  height: 60px;
+}
+
+.common-textarea-option {
+  border: 2px solid #29634c;
+  background-color: snow;
+  border-radius: 0.67em;
+  padding: 0.5em;
+  font-size: 1em;
+  line-height: 1.2;
+  box-sizing: border-box;
+}
+
+.display-wrap-keep-all {
+  white-space: pre-wrap;
+  word-break: normal;
+  width: 260px;
+}
+
+.width-100-percent {
+  width: 100%;
 }
