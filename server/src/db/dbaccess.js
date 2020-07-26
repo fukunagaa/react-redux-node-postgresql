@@ -71,4 +71,21 @@ export default {
       console.log("Client disconnected successfully");
     }
   },
+  updateContent: async function (id, content) {
+    try {
+      client = new Client(postgresOption);
+      await client.connect();
+      console.log("Connected successfully in async");
+      const updateContentCount = await client.query(
+        "update todos_table set content = $1, updated_date = current_timestamp where id_seq = $2",
+        [content, id]
+      );
+      return updateContentCount.rowCount;
+    } catch (err) {
+      console.log("Something wrong happend", e);
+    } finally {
+      await client.end();
+      console.log("Client disconnected successfully");
+    }
+  },
 };

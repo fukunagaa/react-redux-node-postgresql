@@ -114,7 +114,14 @@ const server = http.createServer(async (req, res) => {
                 const toggleArray = await todoRouter.selectTodoAll();
                 contextType = "application/json";
                 resData = JSON.stringify(toggleArray);
-                console.log(toggleArray);
+                setResponse(res, contextType, resData, encoding);
+                break;
+              case "/updateContent":
+                console.log("axios updateContext");
+                await todoRouter.updateContent(query.id, query.content);
+                const updateContextArray = await todoRouter.selectTodoAll();
+                contextType = "application/json";
+                resData = JSON.stringify(updateContextArray);
                 setResponse(res, contextType, resData, encoding);
                 break;
               case "/selectTodo":

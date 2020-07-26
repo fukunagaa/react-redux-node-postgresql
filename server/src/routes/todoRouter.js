@@ -15,7 +15,12 @@ export async function updateStatus(id, status) {
   return updateStatusCount;
 }
 
+export async function updateContent(id, content) {
+  const updateContentCount = await dbaccess.updateContent(id, content);
+  return updateContentCount;
+}
+
 export async function updateFavorite(id, favorite) {
-    const updateFavoriteCount = await dbaccess.updateFavorite(id, favorite);
-    return updateFavoriteCount;
-  }
+  const updateFavoriteCount = await dbaccess.updateFavorite(id, favorite);
+  return updateFavoriteCount;
+}

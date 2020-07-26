@@ -9,6 +9,7 @@ export const getLocalTodoList = (data) => {
         content: obj.content,
         status: obj.status,
         favorite: obj.favorite,
+        changingFlag: false,
       },
     };
     allIds.push(intId);
