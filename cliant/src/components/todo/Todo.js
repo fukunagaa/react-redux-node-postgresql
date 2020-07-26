@@ -24,7 +24,7 @@ const Todo = ({ todo, index, toggleFavorite }) => (
           onClick={() => {
             let params = new URLSearchParams();
             params.append("id", index);
-            params.append("favorite", todo.favorite);
+            params.append("favorite", !todo.favorite);
             toggleFavorite(params);
           }}
         >
