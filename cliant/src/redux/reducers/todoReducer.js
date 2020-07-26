@@ -13,32 +13,14 @@ import {
 
 import { todoInitialState } from "../initialState";
 import { STATUS_TODO, FAVORITE_NO } from "../../utils/constants";
-
-let byIds;
-let allIds;
+import { getTodoList } from "../todoCreator";
 
 export default function (state = todoInitialState, action) {
   console.log(action);
   switch (action.type) {
     case ADD_TODO_FULFILLED: {
       const { data } = action.payload;
-      console.log(data);
-      byIds = new Object();
-      allIds = [];
-      data.map((obj) => {
-        let intId = Number(obj.id_seq);
-        console.log(intId);
-        byIds = {
-          ...byIds,
-          [intId]: {
-            content: obj.content,
-            status: obj.status,
-            favorite: obj.favorite,
-          },
-        };
-        allIds.push(intId);
-      });
-      console.log(byIds);
+      const { byIds, allIds } = getTodoList(data);
       return {
         allIds,
         byIds,
@@ -46,22 +28,7 @@ export default function (state = todoInitialState, action) {
     }
     case DROP_TODO_FULFILLED: {
       const { data } = action.payload;
-      console.log(data);
-      byIds = new Object();
-      allIds = [];
-      data.map((obj) => {
-        let intId = Number(obj.id_seq);
-        console.log(intId);
-        byIds = {
-          ...byIds,
-          [intId]: {
-            content: obj.content,
-            status: obj.status,
-            favorite: obj.favorite,
-          },
-        };
-        allIds.push(intId);
-      });
+      const { byIds, allIds } = getTodoList(data);
       console.log(byIds);
       return {
         allIds,
@@ -70,23 +37,7 @@ export default function (state = todoInitialState, action) {
     }
     case TOGGLE_FAVORITE_FULFILLED: {
       const { data } = action.payload;
-      console.log(data);
-      byIds = new Object();
-      allIds = [];
-      data.map((obj) => {
-        let intId = Number(obj.id_seq);
-        console.log(intId);
-        byIds = {
-          ...byIds,
-          [intId]: {
-            content: obj.content,
-            status: obj.status,
-            favorite: obj.favorite,
-          },
-        };
-        allIds.push(intId);
-      });
-      console.log(byIds);
+      const { byIds, allIds } = getTodoList(data);
       return {
         allIds,
         byIds,
