@@ -13,7 +13,7 @@ import {
 
 import { todoInitialState } from "../initialState";
 import { STATUS_TODO, FAVORITE_NO } from "../../utils/constants";
-import { getTodoList } from "../todoCreator";
+import { getLocalTodoList } from "../todoCreator";
 
 export default function (state = todoInitialState, action) {
   console.log(action);
@@ -22,7 +22,7 @@ export default function (state = todoInitialState, action) {
     case DROP_TODO_FULFILLED:
     case TOGGLE_FAVORITE_FULFILLED: {
       const { data } = action.payload;
-      const { byIds, allIds } = getTodoList(data);
+      const { byIds, allIds } = getLocalTodoList(data);
       return {
         allIds,
         byIds,

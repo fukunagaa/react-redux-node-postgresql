@@ -1,5 +1,4 @@
-export const getTodoList = (data) => {
-  console.log("開始★");
+export const getLocalTodoList = (data) => {
   let byIds = new Object();
   let allIds = [];
   data.map((obj) => {
