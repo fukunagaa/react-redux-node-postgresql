@@ -7,7 +7,7 @@ class AddTodo extends React.Component {
     super(props);
     this.state = {
       text: "",
-      base64: "",
+      imageUrlBase64: undefined,
     };
   }
   changeText = () => {
@@ -21,7 +21,7 @@ class AddTodo extends React.Component {
     params.append("content", content);
     this.props.addTodo(params);
     console.log(this.state);
-    this.setState({ text: "", base64: "" });
+    this.setState({ text: "", imageUrlBase64: undefined });
   };
 
   changePreview = () => {
@@ -31,8 +31,7 @@ class AddTodo extends React.Component {
     console.log(image.files[0]);
     let fileReader = new FileReader();
     fileReader.onload = () => {
-      document.getElementById("preview").src = fileReader.result;
-      this.setState({ base64: fileReader.result });
+      this.setState({ imageUrlBase64: fileReader.result });
     };
     if (file) {
       fileReader.readAsDataURL(file);
@@ -59,6 +58,7 @@ class AddTodo extends React.Component {
               className={"image-preview"}
               width="100px"
               height="100px"
+              src={this.state.imageUrlBase64}
             />
           </div>
           <div className={"item"}>
