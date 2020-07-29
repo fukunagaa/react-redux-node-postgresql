@@ -112,3 +112,8 @@ nav li a:hover {
 .width-100-percent {
   width: 100%;
 }
+
+.add-todo-area-container {
+  display: flex;
+  justify-content: flex-start;
+}
