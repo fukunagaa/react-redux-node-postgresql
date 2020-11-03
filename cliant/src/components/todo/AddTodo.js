@@ -7,6 +7,7 @@ class AddTodo extends React.Component {
     super(props);
     this.state = {
       text: "",
+      imageUrlBase64: undefined,
     };
   }
   changeText = () => {
@@ -14,23 +15,64 @@ class AddTodo extends React.Component {
     this.setState({ text });
   };
 
-  add = () => {
-    const text = this.state.text;
-    this.props.addTodo(text);
-    this.setState({ text: "" });
+  addTodo = () => {
+    const content = this.state.text;
+    const params = new URLSearchParams();
+    params.append("content", content);
+    this.props.addTodo(params);
+    console.log(this.state);
+    this.setState({ text: "", imageUrlBase64: undefined });
+  };
+
+  changePreview = () => {
+    console.log("preview");
+    const image = document.getElementById("image");
+    const file = image.files[0];
+    console.log(image.files[0]);
+    let fileReader = new FileReader();
+    fileReader.onload = () => {
+      this.setState({ imageUrlBase64: fileReader.result });
+    };
+    if (file) {
+      fileReader.readAsDataURL(file);
+    }
   };
 
   render() {
     return (
       <div>
-        <input
-          id="add-todo-text-area"
-          type="text"
-          placeholder="example) go shopping"
-          onChange={this.changeText}
-          value={this.state.text}
-        />
-        <button onClick={this.add}>todo追加</button>
+        <div className={"add-todo-area-container"}>
+          <div className={"item"}>
+            <textarea
+              className={"common-textarea-option main-textarea-size"}
+              id="add-todo-text-area"
+              type="text"
+              placeholder="example) go shopping"
+              onChange={this.changeText}
+              value={this.state.text}
+            />
+          </div>
+          <div className={"item"}>
+            <img
+              id="preview"
+              className={"image-preview"}
+              width="100px"
+              height="100px"
+              src={this.state.imageUrlBase64}
+            />
+          </div>
+          <div className={"item"}>
+            <input
+              type="file"
+              accept="image/*"
+              id="image"
+              onChange={() => this.changePreview()}
+            />
+          </div>
+        </div>
+        <div>
+          <button onClick={this.addTodo}>todo追加</button>
+        </div>
       </div>
     );
   }

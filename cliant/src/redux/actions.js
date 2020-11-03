@@ -1,25 +1,36 @@
-import { ADD_TODO, DROP_TODO, TOGGLE_FAVORITE } from "./actionTypes";
+import {
+  ADD_TODO,
+  DROP_TODO,
+  TOGGLE_FAVORITE,
+  CHANGE_CONTENT_FLAG,
+  FETCH_UPDATE_CONTENT,
+} from "./actionTypes";
+import axios from "axios";
 
-let todoId = 0;
-export const addTodo = (content) => ({
+export const addTodo = (params) => ({
   type: ADD_TODO,
-  payload: {
-    content,
-    id: ++todoId,
-  },
+  payload: axios.post("/addTodo", params),
 });
 
-export const dropTodo = (event, status) => ({
+export const dropTodo = (params) => ({
   type: DROP_TODO,
-  payload: {
-    event,
-    status,
-  },
+  payload: axios.post("/updateStatus", params),
 });
 
-export const toggleFavorite = (id) => ({
+export const toggleFavorite = (params) => ({
   type: TOGGLE_FAVORITE,
+  payload: axios.post("/updateFavorite", params),
+});
+
+export const updateContent = (params) => ({
+  type: FETCH_UPDATE_CONTENT,
+  payload: axios.post("/updateContent", params),
+});
+
+export const updateChangeFlag = (id, changingFlag) => ({
+  type: CHANGE_CONTENT_FLAG,
   payload: {
     id,
+    changingFlag,
   },
 });

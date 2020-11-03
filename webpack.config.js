@@ -2,9 +2,10 @@ const path = require("path");
 
 const cliant = {
   mode: "development",
+  target: "node",
   // エントリポイントの定義
   entry: {
-    app: [path.join(__dirname, "cliant/src/index.js")],
+    app: ["@babel/polyfill", path.join(__dirname, "cliant/src/index.js")],
   },
   // 出力先の定義
   output: {
@@ -25,7 +26,7 @@ const cliant = {
           {
             loader: "babel-loader",
             options: {
-              presets: ["@babel/preset-react", "@babel/preset-env"],
+              presets: ["@babel/preset-env","@babel/preset-react"],
               plugins: [
                 ["@babel/plugin-proposal-class-properties", { loose: true }],
               ],
@@ -41,14 +42,11 @@ const server = {
   mode: "development",
   // node_moduleを使うために必要(クライアントは必要なさそう。)
   target: "node",
-  // node_moduleの読み込み解消のため
-  node: {
-    fs: "empty",
-  },
   // エントリポイントの定義
   entry: {
     app: ["@babel/polyfill", path.join(__dirname, "server/src/index.js")],
   },
+  externals: ["pg-native"],
   // 出力先の定義
   output: {
     path: path.join(__dirname, "server"),

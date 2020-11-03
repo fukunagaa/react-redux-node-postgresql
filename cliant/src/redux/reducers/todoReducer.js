@@ -1,60 +1,78 @@
-import { ADD_TODO, DROP_TODO, TOGGLE_FAVORITE } from "../actionTypes";
+import {
+  ADD_TODO_PENDING,
+  ADD_TODO_FULFILLED,
+  ADD_TODO_REJECTED,
+  DROP_TODO_PENDING,
+  DROP_TODO_FULFILLED,
+  DROP_TODO_REJECTED,
+  TOGGLE_FAVORITE,
+  TOGGLE_FAVORITE_PENDING,
+  TOGGLE_FAVORITE_FULFILLED,
+  TOGGLE_FAVORITE_REJECTED,
+  CHANGE_CONTENT_FLAG,
+  FETCH_UPDATE_CONTENT_PENDING,
+  FETCH_UPDATE_CONTENT_FULFILLED,
+  FETCH_UPDATE_CONTENT_REJECTED,
+} from "../actionTypes";
 
 import { todoInitialState } from "../initialState";
-import {
-  STATUS_TODO,
-  STATUS_DOING,
-  STATUS_DONE,
-  FAVORITE_YES,
-  FAVORITE_NO,
-} from "../../utils/constants";
+import { STATUS_TODO, FAVORITE_NO } from "../../utils/constants";
+import { getLocalTodoList } from "../todoCreator";
 
 export default function (state = todoInitialState, action) {
+  console.log(action);
   switch (action.type) {
-    case ADD_TODO: {
-      const { id, content } = action.payload;
+    case ADD_TODO_PENDING:
+    case DROP_TODO_PENDING:
+    case TOGGLE_FAVORITE_PENDING:
+    case FETCH_UPDATE_CONTENT_PENDING:
+      console.log("PEDDING NOW");
       return {
         ...state,
-        allIds: [...state.allIds, id],
-        byIds: {
-          ...state.byIds,
-          [id]: {
-            content,
-            status: STATUS_TODO,
-            favorite: FAVORITE_NO,
-          },
+        fetchStatus: {
+          fetching: true,
+          fetched: false,
+        },
+      };
+    case ADD_TODO_FULFILLED:
+    case DROP_TODO_FULFILLED:
+    case TOGGLE_FAVORITE_FULFILLED:
+    case FETCH_UPDATE_CONTENT_FULFILLED: {
+      const { data } = action.payload;
+      const { byIds, allIds } = getLocalTodoList(data);
+      return {
+        allIds,
+        byIds,
+        fetchStatus: {
+          fetching: false,
+          fetched: true,
         },
       };
     }
-    case DROP_TODO: {
-      const { event, status } = action.payload;
-      const id = Number(event.dataTransfer.getData("id"));
-      // dropイベント用
-      event.preventDefault();
+    case ADD_TODO_REJECTED:
+    case DROP_TODO_REJECTED:
+    case TOGGLE_FAVORITE_REJECTED:
+    case FETCH_UPDATE_CONTENT_REJECTED:
+      return {
+        ...state,
+        fetchStatus: {
+          fetching: false,
+          fetched: true,
+          fetchError: payload,
+        },
+      };
+    case CHANGE_CONTENT_FLAG:
+      const { id, changingFlag } = action.payload;
       return {
         ...state,
         byIds: {
           ...state.byIds,
           [id]: {
             ...state.byIds[id],
-            status,
+            changingFlag,
           },
         },
       };
-    }
-    case TOGGLE_FAVORITE: {
-      const { id } = action.payload;
-      return {
-        ...state,
-        byIds: {
-          ...state.byIds,
-          [id]: {
-            ...state.byIds[id],
-            favorite: !state.byIds[id].favorite
-          }
-        }
-      }
-    }
     default:
       return state;
   }
